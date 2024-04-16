@@ -12,5 +12,7 @@ namespace SistemaIngreso.Data
         //Registramos nuestros modelos
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Historia> Historial { get; set; }
+
+        
     }
 }
