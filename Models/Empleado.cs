@@ -9,6 +9,5 @@ namespace SistemaIngreso.Models
         public string? TipoDocumento { get; set; }
         public string? Documento { get; set; }
         public int IdHistorial { get; set; } 
-
     }
 }
