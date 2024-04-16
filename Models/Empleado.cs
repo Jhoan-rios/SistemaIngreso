@@ -8,6 +8,6 @@ namespace SistemaIngreso.Models
         public string? Correo { get; set; }
         public string? TipoDocumento { get; set; }
         public string? Documento { get; set; }
-        public int IdHistorial { get; set; } 
+        public string? Contraseña { get; set; }
     }
 }
