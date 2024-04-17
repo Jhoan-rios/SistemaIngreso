@@ -4,9 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using SistemaIngreso.Data;
 using SistemaIngreso.Models;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Authorization;
+
+
 
 namespace Empleados.Controllers
-{
+{   
+
+    [Authorize]
     public class EmpleadosController : Controller
     {
         public readonly BaseContext _context;

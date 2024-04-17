@@ -1,15 +1,15 @@
 @model Empleado
 <section class="Main">
     <h1>Registro de entrada y salida</h1>
-    <form class="FlexEvenlyC" asp-controller="Login" asp-action="Index" method="POST">
+    <form class="FlexEvenlyC" asp-action="Index" method="POST">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Correo o documento</label>
-            <input type="email" class="form-control">
+            <input type="email" name="Correo" class="form-control" required>
         </div>
         <div class="mb-4">
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control">
+            <input type="password" name="Contraseña" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-info">Log in</button>
+        <button type="submit" class="btn btn-info">Iniciar sesion</button>
     </form>
 </section>
