@@ -31,6 +31,8 @@ namespace Empleados.Controllers
         public async Task<IActionResult>Index(){
             return View(await _context.Empleados.ToListAsync());
         }
+
+
         public async Task<IActionResult> Details(int? id){
             return View(await _context.Empleados.FirstOrDefaultAsync(e => e.Id == id));
         }
