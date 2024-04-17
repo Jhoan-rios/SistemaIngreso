@@ -19,6 +19,16 @@ namespace Empleados.Controllers
         {
             _context = context;
         }
+
+        /* Select de la conexion de las dos tablas*/
+
+        public IActionResult ObtetnerHistorialDeEmpleado(int Id)
+        {
+            var historia = _context.Historial.Where(h => h.Id == Id).ToList();
+            return Ok(historia);
+        }
+
+
         public async Task<IActionResult>Index(){
             return View(await _context.Empleados.ToListAsync());
         }
@@ -30,9 +40,12 @@ namespace Empleados.Controllers
         }
         [HttpPost]
         public IActionResult Create(Empleado e){
+            e.Contraseña = BCrypt.Net.BCrypt.HashPassword(e.Contraseña);
             _context.Add(e);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        /* [HttpGet("eagerLoading/{id:int}")]
+        public async Task<IActionResult> */
     }    
 }

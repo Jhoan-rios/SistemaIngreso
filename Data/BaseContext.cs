@@ -13,6 +13,16 @@ namespace SistemaIngreso.Data
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Historia> Historial { get; set; }
 
-        
+        /* Configuracion para la conexion de la base de datos */
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Historia>()
+            .HasOne(h => h.Empleado)
+            .WithMany(p => p.Historial)
+            .HasForeignKey(h => h.Id)
+            .OnDelete(DeleteBehavior.Cascade);
+        }
+
     }
 }
