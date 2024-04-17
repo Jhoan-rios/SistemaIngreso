@@ -28,7 +28,6 @@ namespace Empleados.Controllers
             return Ok(historia);
         }
 
-
         public async Task<IActionResult>Index(){
             return View(await _context.Empleados.ToListAsync());
         }

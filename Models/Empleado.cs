@@ -15,6 +15,6 @@ namespace SistemaIngreso.Models
         public string? TipoDocumento { get; set; }
         public string? Documento { get; set; }
         public string? Contraseña { get; set; }
-        public List<Historia> Historial { get; set; }
+        public List<Historia>? Historial { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Historial.Controllers
 {
     public class HistorialController : Controller
     {
-         public readonly BaseContext _context;
+        public readonly BaseContext _context;
         public HistorialController (BaseContext context)
         {
             _context = context;

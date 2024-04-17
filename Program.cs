@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using SistemaIngreso.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
 
 
 
@@ -13,7 +14,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(option =>{
     option.LoginPath = "/Login/Index";
-    option.ExpireTimeSpan = TimeSpan.FromSeconds(20);
+    option.ExpireTimeSpan = TimeSpan.FromSeconds(5.0);
+    option.SlidingExpiration = true;
     option.AccessDeniedPath = "/Login/Index";
 });
 
