@@ -28,10 +28,13 @@ namespace Empleados.Controllers
             return Ok(historia);
         }
 
-
-        public async Task<IActionResult>Index(){
-            return View(await _context.Empleados.ToListAsync());
+        public IActionResult Index()
+        {
+            var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
+            return View(EmpleadoHorario);
         }
+
+
         public async Task<IActionResult> Details(int? id){
             return View(await _context.Empleados.FirstOrDefaultAsync(e => e.Id == id));
         }
