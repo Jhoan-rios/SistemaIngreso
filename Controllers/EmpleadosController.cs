@@ -5,6 +5,7 @@ using SistemaIngreso.Data;
 using SistemaIngreso.Models;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 
 
@@ -28,8 +29,18 @@ namespace Empleados.Controllers
             return Ok(historia);
         }
 
-        public async Task<IActionResult>Index(){
-            return View(await _context.Empleados.ToListAsync());
+        public IActionResult Index(){
+
+            var CookieId = HttpContext.Request.Cookies["Id"];
+            
+
+            var CookieNombre = HttpContext.Request.Cookies["Nombre"];
+            ViewBag.CookieNombre = CookieNombre;
+
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
+            return View(EmpleadoHorario);
         }
 
 

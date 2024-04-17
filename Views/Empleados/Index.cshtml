@@ -1,8 +1,10 @@
 
 
 
+<h1>@ViewBag.CookieNombre</h1>
+
 <div style="width: 50%; float: left;">
-    <h1>Users</h1>
+    <h1></h1>
 </div>
 
 <form method="get" asp-action="Search">
@@ -24,22 +26,8 @@
         <td><b>Options</b></td>
     </tr>
     </thead>
-    @foreach (var empleado in Model){
-    <tr>
-        <td>@empleado.Id</td>
-        <td>@empleado.Nombre</td>
-        <td>@empleado.Apellido</td>
-        @foreach (var historia in empleado.Historial){
-            <td>@historia.HoraEntrada</td>
-            <td>@historia.HoraSalida</td>
-        }
-        <td>
-            <a class="btn btn-warning" asp-controller="Empleados" asp-action="Edit" asp-route-id="@empleado.Id">Editar</a> |
-            <a class="btn btn-info" asp-controller="Empleados" asp-action="Details" asp-route-id="@empleado.Id">Detalles</a> |
-            <a class="btn btn-danger" asp-controller="Empleados" asp-action="Delete" asp-route-id="@empleado.Id">Eliminar</a>
-        </td>
-    </tr>
-    }
+    
+    
 </table>
 <div>
     <a class="btn btn-primary" asp-controller="Empleados" asp-action="Create">Crear Empleados</a>

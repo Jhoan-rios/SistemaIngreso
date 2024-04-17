@@ -6,6 +6,8 @@ using BCrypt.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+
 
 
 
@@ -30,9 +32,14 @@ namespace Login.Controllers{
 
             if (empleado != null && BCrypt.Net.BCrypt.Verify(Contraseña, empleado.Contraseña)){
                 
+
+                Response.Cookies.Append("Id",empleado.Id.ToString());
+                Response.Cookies.Append("Nombre",empleado.Nombre);
+
+
                 var claims = new List<Claim>{
                     new Claim(ClaimTypes.Name, empleado.Nombre),
-                    new Claim("Correo", empleado.Correo)
+                    new Claim("Correo", empleado.Correo),
                 };
 
                 var claimsIndentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
@@ -40,7 +47,9 @@ namespace Login.Controllers{
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIndentity));
 
                 
-                return RedirectToAction("Index", "Empleados");
+                /* return RedirectToAction("Empleados", new {id = id}); */
+
+                return RedirectToAction("Index","Empleados");
             }
             else{
                 return View();
