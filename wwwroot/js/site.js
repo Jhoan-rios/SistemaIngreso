@@ -1,4 +1,30 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+//eliminar
+function ConfirmJob(id){
+    Swal.fire({
+        title: "Seguro quieres eliminar esto?",
+        text: "No puedes revertirlo despues!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Borralo!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = "http://localhost:5136/Jobs/Delete/"+id;
+            Swal.fire({
+                title: "Borrado!",
+                text: "Este archivo ha sido borrado.",
+                icon: "success"
+            });
+        }
+    });
+}
 
-// Write your JavaScript code.
+function Crear(){
+    Swal.fire({
+        title: "Creado!",
+        text: "Tu archivo ha sido exitosamente creado.",
+        icon: "success"
+    });
+}
