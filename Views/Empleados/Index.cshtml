@@ -1,4 +1,6 @@
-
+@{
+    var data = ViewData["userdata"] as List<Historia>;
+}
 
 <article class="EmpleadoPrincipal">
     <section class="Nombre">
@@ -16,12 +18,12 @@
             </thead>
                 
             <tbody style="vertical-align: middle;">
-                
-                <tr class="text-center text-white">
-                    <td></td>
-                    <td></td>
-                </tr>
-                
+                @foreach(var fechas in data){
+                    <tr class="text-white text-center">
+                        <td>@fechas.HoraEntrada</td>
+                        <td>@fechas.HoraSalida</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </section>
