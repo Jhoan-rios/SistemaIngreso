@@ -1,37 +1,37 @@
 
 
-
-<h1>@ViewBag.CookieNombre</h1>
-
-<div style="width: 50%; float: left;">
-    <h1></h1>
-</div>
-
-<form method="get" asp-action="Search">
-    <div class="group">
-        <input placeholder="Search" name="searchString" type="search" class="input">
-    </div>
-</form>
-
-
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-        <td><b>Id</b></td>
-        <td><b>Nombre</b></td>
-        <td><b>Apellido</b></td>
-        <td><b>Hora entrada</b></td>
-        <td><b>Hora salida</b></td>
-        <td><b>Options</b></td>
-    </tr>
-    </thead>
+<article class="EmpleadoPrincipal">
+    <section class="Nombre">
+        <h1>Bienvenido</h1>
+        <h1>@ViewBag.CookieNombre</h1>
+        <a class="btn btn-danger" asp-controller="Login" asp-action="Index">Cerrar sesion</a>
+    </section>
+    <section class="TablaHistorial">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="bg-info text-white text-center">
+                    <th>HORA DE ENTRADA</th>
+                    <th>HORA DE SALIDA</th>
+                </tr>
+            </thead>
+                
+            <tbody style="vertical-align: middle;">
+                
+                <tr class="text-center text-white">
+                    <td></td>
+                    <td></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </section>
+    <section class="Botones">
+        <a class="btn btn-warning btn-lg" asp-controller="Login" asp-action="Index">Marcar entrada</a>
+        <a class="btn btn-success btn-lg" asp-controller="Login" asp-action="Index">Marcar salida</a>
+        <a class="btn btn-danger btn-lg" asp-controller="Login" asp-action="Index">Eliminar empleado</a>
+    </section>
     
-    
-</table>
-<div>
-    <a class="btn btn-primary" asp-controller="Empleados" asp-action="Create">Crear Empleados</a>
-</div>
+</article>
 
-<a class="btn btn-danger btn-sm" asp-controller="Login" asp-action="Index">Salir</a>
+
 

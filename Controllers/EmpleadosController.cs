@@ -12,7 +12,7 @@ using System.Security.Claims;
 namespace Empleados.Controllers
 {   
 
-    [Authorize]
+    /* [Authorize] */
     public class EmpleadosController : Controller
     {
         public readonly BaseContext _context;
@@ -23,30 +23,34 @@ namespace Empleados.Controllers
 
         /* Select de la conexion de las dos tablas*/
 
-        public IActionResult ObtetnerHistorialDeEmpleado(int Id)
+        public IActionResult ObtetnerHistorialDeEmpleado()
         {
-            var historia = _context.Historial.Where(h => h.Id == Id).ToList();
+            var CookieId = HttpContext.Request.Cookies["Id"];
+            var historia = _context.Historial.Where(h => h.Id == Convert.ToInt32(CookieId)).ToList();
             return Ok(historia);
         }
 
         public IActionResult Index(){
-
-            var CookieId = HttpContext.Request.Cookies["Id"];
             
-
+            var CookieId = HttpContext.Request.Cookies["Id"];
             var CookieNombre = HttpContext.Request.Cookies["Nombre"];
             ViewBag.CookieNombre = CookieNombre;
-
-            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
             return View(EmpleadoHorario);
         }
 
+        /* public async Task<IActionResult> Index(){
 
-        public async Task<IActionResult> Details(int? id){
-            return View(await _context.Empleados.FirstOrDefaultAsync(e => e.Id == id));
-        }
+            var CookieNombre = HttpContext.Request.Cookies["Nombre"];
+            ViewBag.CookieNombre = CookieNombre;
+
+            var CookieId = HttpContext.Request.Cookies["Id"];
+
+            var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
+            return View(await _context.Empleados.FirstOrDefaultAsync(m => m.Id == Convert.ToInt32(CookieId)));
+        } */
+
         public IActionResult Create(){
             return View();
         }
@@ -57,7 +61,5 @@ namespace Empleados.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        /* [HttpGet("eagerLoading/{id:int}")]
-        public async Task<IActionResult> */
     }    
 }

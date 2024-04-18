@@ -47,11 +47,11 @@ namespace Login.Controllers{
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIndentity));
 
                 
-                /* return RedirectToAction("Empleados", new {id = id}); */
 
                 return RedirectToAction("Index","Empleados");
             }
             else{
+                TempData["Message"] = "El documento o la contraseña no son correctos";
                 return View();
             }
         }
