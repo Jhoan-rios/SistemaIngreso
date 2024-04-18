@@ -1,13 +1,11 @@
 
 
-
 @{
     var data = ViewData["userdata"] as List<Historia>;
-    Console.WriteLine(data);
 }
-
+ 
 <h1>@ViewBag.CookieNombre</h1>
-<h1>..@data</h1>
+<h1>@ViewBag.CookieId</h1>
 
 <div style="width: 50%; float: left;">
     <h1></h1>
@@ -19,7 +17,7 @@
     </div>
 </form>
 
-
+    @model List<Empleado>
 
 <table class="table table-hover">
     <thead>
@@ -30,10 +28,19 @@
         <td><b>Hora entrada</b></td>
         <td><b>Hora salida</b></td>
         <td><b>Options</b></td>
+        <td></td>
     </tr>
     </thead>
 
+ @foreach(var tuki in data)
+    {
+        <h1>@tuki.Id</h1>
+        <h1>@tuki.HoraEntrada</h1>
+        <h1>@tuki.HoraSalida</h1>
+        <h1>@tuki.IdEmpleado</h1>
+    }
 
+    
 
 </table>
 <div>

@@ -40,16 +40,13 @@ namespace Empleados.Controllers
 
 
 
-            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
 
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
             //esto funciona pero la basura que tienen por base de datos no se acopla sorry no puedo hacer milagros!! cari bonito :#
             var query = _context.Historial.AsQueryable();
-            query = query.Where(e => e.IdEmpleado == int.Parse(CookieId) );
-
-            ViewData["userdata"] = query;
-            Console.WriteLine($"holi {query}");
-
+            query = query.Where(e => e.IdEmpleado == int.Parse(CookieId));
+            ViewData["userdata"] = query.ToList();
             return View(EmpleadoHorario);
         }
 
@@ -67,7 +64,5 @@ namespace Empleados.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        /* [HttpGet("eagerLoading/{id:int}")]
-        public async Task<IActionResult> */
     }    
 }
