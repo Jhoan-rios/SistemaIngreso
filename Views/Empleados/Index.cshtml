@@ -1,7 +1,13 @@
 
 
 
+@{
+    var data = ViewData["userdata"] as List<Historia>;
+    Console.WriteLine(data);
+}
+
 <h1>@ViewBag.CookieNombre</h1>
+<h1>..@data</h1>
 
 <div style="width: 50%; float: left;">
     <h1></h1>
@@ -26,8 +32,9 @@
         <td><b>Options</b></td>
     </tr>
     </thead>
-    
-    
+
+
+
 </table>
 <div>
     <a class="btn btn-primary" asp-controller="Empleados" asp-action="Create">Crear Empleados</a>

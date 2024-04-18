@@ -29,17 +29,27 @@ namespace Empleados.Controllers
             return Ok(historia);
         }
 
-        public IActionResult Index(){
+        public async Task<IActionResult> Index(){
 
             var CookieId = HttpContext.Request.Cookies["Id"];
+            
             
 
             var CookieNombre = HttpContext.Request.Cookies["Nombre"];
             ViewBag.CookieNombre = CookieNombre;
 
+
+
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
+            //esto funciona pero la basura que tienen por base de datos no se acopla sorry no puedo hacer milagros!! cari bonito :#
+            var query = _context.Historial.AsQueryable();
+            query = query.Where(e => e.IdEmpleado == int.Parse(CookieId) );
+
+            ViewData["userdata"] = query;
+            Console.WriteLine($"holi {query}");
+
             return View(EmpleadoHorario);
         }
 
