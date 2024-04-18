@@ -2,6 +2,13 @@
 
 <section class="Main">
     <h1>Registro de entrada y salida</h1>
+    
+    @if (TempData["Message"]!=null){
+        <div class="alert alert-danger">
+            @TempData["Message"]
+    </div>
+    }
+
     <form class="FlexEvenlyC" asp-action="Index" method="POST">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Correo o documento</label>

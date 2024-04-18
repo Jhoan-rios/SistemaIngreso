@@ -52,7 +52,7 @@ namespace Login.Controllers{
             }
             else{
                 TempData["Message"] = "El documento o la contraseña no son correctos";
-                return View();
+                return RedirectToAction("Index", "Login");
             }
         }
 

@@ -4,6 +4,7 @@
 
 <article class="EmpleadoPrincipal">
     <section class="Nombre">
+        <a class="btn btn-primary" asp-controller="Empleados" asp-action="Create">Crear nuevo empleado</a>
         <h1>Bienvenido</h1>
         <h1>@ViewBag.CookieNombre</h1>
         <a class="btn btn-danger" asp-controller="Login" asp-action="Index">Cerrar sesion</a>
@@ -28,8 +29,8 @@
         </table>
     </section>
     <section class="Botones">
-        <a class="btn btn-warning btn-lg" asp-controller="Login" asp-action="Index">Marcar entrada</a>
-        <a class="btn btn-success btn-lg" asp-controller="Login" asp-action="Index">Marcar salida</a>
+        <a class="btn btn-warning btn-lg" asp-action="Entrada">Marcar entrada</a>
+        <a class="btn btn-success btn-lg" asp-action="Salida">Marcar salida</a>
         <a class="btn btn-danger btn-lg" asp-controller="Login" asp-action="Index">Eliminar empleado</a>
     </section>
     
