@@ -24,7 +24,7 @@ function ConfirmJob(id){
 function Crear(){
     Swal.fire({
         title: "Creado!",
-        text: "Tu archivo ha sido exitosamente creado.",
+        text: "El empleado ha sido exitosamente creado.",
         icon: "success"
     });
 }

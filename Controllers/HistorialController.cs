@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaIngreso.Data;
 using SistemaIngreso.Models;
 using System.Reflection.Metadata;
+using System;
 
 
 namespace Historial.Controllers
@@ -15,8 +16,11 @@ namespace Historial.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult>Index(){
-            return View(await _context.Historial.ToListAsync());
-        }
+
+
+        
+
+        
+
     }
 }

@@ -6,13 +6,15 @@ using SistemaIngreso.Models;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System;
+using Historial.Controllers;
 
 
 
 namespace Empleados.Controllers
 {   
 
-    [Authorize] 
+    //[Authorize] 
     public class EmpleadosController : Controller
     {
         public readonly BaseContext _context;
@@ -30,15 +32,12 @@ namespace Empleados.Controllers
         }
 
         public async Task<IActionResult> Index(){
-
             var CookieId = HttpContext.Request.Cookies["Id"];
-            
             var CookieNombre = HttpContext.Request.Cookies["Nombre"];
             ViewBag.CookieNombre = CookieNombre;
 
-
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
-            //esto funciona pero la basura que tienen por base de datos no se acopla sorry no puedo hacer milagros!! cari bonito :#
+            
             var query = _context.Historial.AsQueryable();
             query = query.Where(e => e.IdEmpleado == int.Parse(CookieId));
             ViewData["userdata"] = query.ToList();
@@ -55,5 +54,27 @@ namespace Empleados.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
+        public IActionResult Entrada(){
+            DateTime Hora = DateTime.Now;
+            var CookieId = HttpContext.Request.Cookies["Id"];
+
+            var HoraEntrada = new Historia{
+                HoraEntrada = Hora,
+                HoraSalida = null,
+                IdEmpleado = Convert.ToInt32(CookieId),
+            };
+
+            _context.Historial.Add(HoraEntrada);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+    
+
+        
     }    
 }
