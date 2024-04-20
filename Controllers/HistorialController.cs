@@ -17,10 +17,6 @@ namespace Historial.Controllers
             _context = context;
         }
 
-
         
-
-        
-
     }
 }

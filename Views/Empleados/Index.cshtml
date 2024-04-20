@@ -1,6 +1,8 @@
 @{
+    ViewData["Title"] = "Inicio";
     var data = ViewData["userdata"] as List<Historia>;
 }
+
 
 <article class="EmpleadoPrincipal">
     <section class="Nombre">
@@ -30,11 +32,12 @@
     </section>
     <section class="Botones">
         <a class="btn btn-warning btn-lg" asp-action="Entrada">Marcar entrada</a>
-        <a class="btn btn-success btn-lg" asp-action="Salida">Marcar salida</a>
+        <a class="btn btn-success btn-lg" asp-action="Salida" style="@ViewData["boton"]">Marcar salida</a>
         <a class="btn btn-danger btn-lg" asp-controller="Login" asp-action="Index">Eliminar empleado</a>
     </section>
     
 </article>
+
 
 
 

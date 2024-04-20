@@ -32,6 +32,7 @@ namespace Empleados.Controllers
         }
 
         public async Task<IActionResult> Index(){
+            ViewData["boton"] = "display: none";
             var CookieId = HttpContext.Request.Cookies["Id"];
             var CookieNombre = HttpContext.Request.Cookies["Nombre"];
             ViewBag.CookieNombre = CookieNombre;
@@ -57,20 +58,21 @@ namespace Empleados.Controllers
 
         
         public IActionResult Entrada(){
-            DateTime Hora = DateTime.Now;
             var CookieId = HttpContext.Request.Cookies["Id"];
 
             var HoraEntrada = new Historia{
-                HoraEntrada = Hora,
-                HoraSalida = null,
-                IdEmpleado = Convert.ToInt32(CookieId),
+                HoraEntrada = DateTime.Now,
+                IdEmpleado = Int32.Parse(CookieId),
             };
 
             _context.Historial.Add(HoraEntrada);
             _context.SaveChanges();
 
+            ViewData["boton"] = "display: block";
+
             return RedirectToAction("Index");
         }
+           
 
 
     

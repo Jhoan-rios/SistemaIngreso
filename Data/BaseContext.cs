@@ -20,7 +20,7 @@ namespace SistemaIngreso.Data
             modelBuilder.Entity<Historia>()
             .HasOne(h => h.Empleado)
             .WithMany(p => p.Historial)
-            .HasForeignKey(h => h.Id)
+            .HasForeignKey(h => h.IdEmpleado)
             .OnDelete(DeleteBehavior.Cascade);
         }
 
