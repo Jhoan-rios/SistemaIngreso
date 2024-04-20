@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System;
 using Historial.Controllers;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 
 
 
@@ -32,16 +33,31 @@ namespace Empleados.Controllers
         }
 
         public async Task<IActionResult> Index(){
-            ViewData["boton"] = "display: none";
             var CookieId = HttpContext.Request.Cookies["Id"];
             var CookieNombre = HttpContext.Request.Cookies["Nombre"];
             ViewBag.CookieNombre = CookieNombre;
 
+
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
             
-            var query = _context.Historial.AsQueryable();
-            query = query.Where(e => e.IdEmpleado == int.Parse(CookieId));
+            /* A partir de aqui esta el cambio de boton */
+            var salida = _context.Historial.OrderByDescending(s => s.HoraSalida).FirstOrDefault();
+
+            if(salida != null && salida.HoraSalida == null)
+            {
+                ViewData["BtnDisabled"] = true; 
+            }
+            else
+            {
+                ViewData["BtnDisabled"] = false;
+            }
+            /* Hasta aqui es el cambio de boton */
+
+             var query = _context.Historial.AsQueryable();
+             query = query.Where(e => e.IdEmpleado == int.Parse(CookieId)); 
             ViewData["userdata"] = query.ToList();
+
+
             return View(EmpleadoHorario);
         }
 
@@ -67,8 +83,6 @@ namespace Empleados.Controllers
 
             _context.Historial.Add(HoraEntrada);
             _context.SaveChanges();
-
-            ViewData["boton"] = "display: block";
 
             return RedirectToAction("Index");
         }

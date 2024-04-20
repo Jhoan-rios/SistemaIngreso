@@ -31,13 +31,23 @@
         </table>
     </section>
     <section class="Botones">
-        <a class="btn btn-warning btn-lg" asp-action="Entrada">Marcar entrada</a>
-        <a class="btn btn-success btn-lg" asp-action="Salida" style="@ViewData["boton"]">Marcar salida</a>
-        <a class="btn btn-danger btn-lg" asp-controller="Login" asp-action="Index">Eliminar empleado</a>
+    @* Condicional donde se supone que funciona :( *@
+    @if ((bool)ViewData["BtnDisabled"] == true)
+    {
+        <a id="btnUpload" id="btnUpload" type="submit" class="btn btn-warning btn-lg" asp-action="Salida">Marcar salida</a>
+    }
+    else
+    {
+        <a id="btnUpload" type="submit" class="btn btn-success btn-lg" asp-action="Entrada">Marcar entrada</a>
+    }
+
+    <a class="btn btn-danger btn-lg" asp-controller="Login" asp-action="Index">Eliminar empleado</a>
     </section>
     
-</article>
 
+
+    
+</article>
 
 
 

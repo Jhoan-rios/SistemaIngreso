@@ -36,10 +36,14 @@ namespace Login.Controllers{
                 Response.Cookies.Append("Id",empleado.Id.ToString());
                 Response.Cookies.Append("Nombre",empleado.Nombre);
 
+                /* var CookieId = HttpContext.Request.Cookies["Salida"];
+                HttpContext.Response.Cookies.Append("Salida"); */
+
 
                 var claims = new List<Claim>{
                     new Claim(ClaimTypes.Name, empleado.Nombre),
                     new Claim("Correo", empleado.Correo),
+
                 };
 
                 var claimsIndentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
