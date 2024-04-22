@@ -15,7 +15,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 namespace Empleados.Controllers
 {   
 
-    //[Authorize] 
+    [Authorize] 
     public class EmpleadosController : Controller
     {
         public readonly BaseContext _context;
@@ -41,7 +41,7 @@ namespace Empleados.Controllers
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
             
             /* A partir de aqui esta el cambio de boton */
-            var salida = _context.Historial.Where(s => s.IdEmpleado == Int32.Parse(CookieId)).OrderByDescending(s => s.HoraSalida).FirstOrDefault();
+            var salida = _context.Historial.Where(s => s.IdEmpleado == Int32.Parse(CookieId)).OrderByDescending(s => s.HoraSalida== null).FirstOrDefault();
 
             if(salida != null && salida.HoraSalida == null)
             {
@@ -89,15 +89,12 @@ namespace Empleados.Controllers
 
         public IActionResult Salida(){
             var CookieId = HttpContext.Request.Cookies["Id"];
-            var salida =_context.Historial.Where(s => s.IdEmpleado == Int32.Parse(CookieId)).OrderByDescending(s => s.HoraSalida).FirstOrDefault();
+            var salida = _context.Historial.FirstOrDefault(e => e.IdEmpleado == int.Parse(CookieId) && e.HoraSalida == null);
 
-            var HoraSalida = new Historia{
-                
-                HoraSalida = DateTime.Now,
-                IdEmpleado = Int32.Parse(CookieId),
-            };
-
-            _context.Historial.Update(HoraSalida);
+            salida.HoraSalida = DateTime.Now;
+            
+        
+            _context.Historial.Update(salida);
             _context.SaveChanges();
 
             return RedirectToAction("Index");
