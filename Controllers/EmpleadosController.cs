@@ -41,7 +41,7 @@ namespace Empleados.Controllers
             var EmpleadoHorario = _context.Empleados.Include(p => p.Historial).ToList();
             
             /* A partir de aqui esta el cambio de boton */
-            var salida = _context.Historial.OrderByDescending(s => s.HoraSalida).FirstOrDefault();
+            var salida = _context.Historial.Where(s => s.IdEmpleado == Int32.Parse(CookieId)).OrderByDescending(s => s.HoraSalida).FirstOrDefault();
 
             if(salida != null && salida.HoraSalida == null)
             {
@@ -53,8 +53,8 @@ namespace Empleados.Controllers
             }
             /* Hasta aqui es el cambio de boton */
 
-             var query = _context.Historial.AsQueryable();
-             query = query.Where(e => e.IdEmpleado == int.Parse(CookieId)); 
+            var query = _context.Historial.AsQueryable();
+            query = query.Where(e => e.IdEmpleado == int.Parse(CookieId)); 
             ViewData["userdata"] = query.ToList();
 
 
@@ -86,7 +86,23 @@ namespace Empleados.Controllers
 
             return RedirectToAction("Index");
         }
-           
+
+        public IActionResult Salida(){
+            var CookieId = HttpContext.Request.Cookies["Id"];
+            var salida =_context.Historial.Where(s => s.IdEmpleado == Int32.Parse(CookieId)).OrderByDescending(s => s.HoraSalida).FirstOrDefault();
+
+            var HoraSalida = new Historia{
+                
+                HoraSalida = DateTime.Now,
+                IdEmpleado = Int32.Parse(CookieId),
+            };
+
+            _context.Historial.Update(HoraSalida);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
 
     
