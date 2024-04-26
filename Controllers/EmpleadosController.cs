@@ -15,7 +15,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 namespace Empleados.Controllers
 {   
 
-    //[Authorize] 
+    [Authorize] 
     public class EmpleadosController : Controller
     {
         public readonly BaseContext _context;
